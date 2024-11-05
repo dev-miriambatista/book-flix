@@ -202,25 +202,41 @@ if (isset($_GET['action']) && $_GET['action'] == 'fetchBooks' && isset($_GET['ge
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('gender-select').addEventListener('change', function() {
-            var gender = this.value;
+        // Verifica se o elemento com o ID 'gender-select' existe
+        const genderSelect = document.getElementById('gender-select');
+        if (genderSelect) {
+            genderSelect.addEventListener('change', function() {
+                var gender = this.value;
+                
+                // Verifica se um gênero foi selecionado
+                if (gender) {
+                    console.log('Gênero selecionado:', gender); // Log para depuração
 
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', '?action=fetchBooks&gender=' + encodeURIComponent(gender), true);
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', '?action=fetchBooks&gender=' + encodeURIComponent(gender), true);
+                    console.log('Requisição enviada para:', xhr.responseURL); // Log da URL
 
-            xhr.onload = function() {
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    document.getElementById('bookDisplay').innerHTML = xhr.responseText;
+                    xhr.onload = function() {
+                        if (xhr.status >= 200 && xhr.status < 300) {
+                            console.log('Resposta recebida:', xhr.responseText); // Log da resposta
+                            document.getElementById('bookDisplay').innerHTML = xhr.responseText;
+                        } else {
+                            console.error('Erro na solicitação:', xhr.statusText);
+                        }
+                    };
+
+                    xhr.onerror = function() {
+                        console.error('Erro na solicitação.');
+                    };
+
+                    xhr.send();
                 } else {
-                    console.error('Erro na solicitação:', xhr.statusText);
+                    console.warn('Nenhum gênero selecionado.');
                 }
-            };
-
-            xhr.onerror = function() {
-                console.error('Erro na solicitação.');
-            };
-
-            xhr.send();
-        });
+            });
+        } else {
+            console.error('Elemento com ID "gender-select" não encontrado.');
+        }
     });
 </script>
+

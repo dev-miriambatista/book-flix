@@ -1,0 +1,19 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Oswald:wght@200..700&family=Playpen+Sans:wght@100..800&display=swap');
+
+body h1 {
+    width: 50vw;
+    margin-bottom: 10px;
+    font: normal normal 2rem 'Corbel';
+}
+
+#h3_title{
+    font: normal normal 1rem 'Osvaldo';
+}
+
+#p_writer,
+#p_publish,
+#p_edition,
+#p_page{
+    font: normal normal 0.8rem 'fangsong';
+}
